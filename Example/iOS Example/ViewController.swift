@@ -78,9 +78,9 @@ private extension ViewController {
     phoneNumberField.tintColor = ColorConstants.gray
     
     phoneNumberField.textInputDelegates.add(delegate: self)
-    phoneNumberField.defaultTextAttributes = [
-      NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
-      NSAttributedStringKey.font.rawValue: UIFont.systemFont(ofSize: 22, weight: .regular)]
+    phoneNumberField.defaultTextAttributes = convertToNSAttributedStringKeyDictionary([
+      NSAttributedString.Key.foregroundColor.rawValue: UIColor.white,
+      NSAttributedString.Key.font.rawValue: UIFont.systemFont(ofSize: 22, weight: .regular)])
     phoneNumberField.addAttributes([.foregroundColor : ColorConstants.yellow], range: NSRange(location: 0, length: 3))
   }
   
@@ -90,9 +90,9 @@ private extension ViewController {
     sumInputField.tintColor = ColorConstants.gray
     
     sumInputField.textInputDelegates.add(delegate: self)
-    sumInputField.defaultTextAttributes = [
-      NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
-      NSAttributedStringKey.font.rawValue: UIFont.systemFont(ofSize: 22, weight: .regular)]
+    sumInputField.defaultTextAttributes = convertToNSAttributedStringKeyDictionary([
+      NSAttributedString.Key.foregroundColor.rawValue: UIColor.white,
+      NSAttributedString.Key.font.rawValue: UIFont.systemFont(ofSize: 22, weight: .regular)])
     sumInputField.addAttributes([.foregroundColor : ColorConstants.yellow], range: NSRange(location: 0, length: 2))
   }
   
@@ -105,9 +105,9 @@ private extension ViewController {
     cardNumberView.backgroundColor = UIColor.black
     cardNumberView.tintColor = ColorConstants.gray
     
-    cardNumberView.typingAttributes = [
-      NSAttributedStringKey.font.rawValue: UIFont.systemFont(ofSize: 22, weight: .regular),
-      NSAttributedStringKey.foregroundColor.rawValue: UIColor.white]
+    cardNumberView.typingAttributes = convertToNSAttributedStringKeyDictionary([
+      NSAttributedString.Key.font.rawValue: UIFont.systemFont(ofSize: 22, weight: .regular),
+      NSAttributedString.Key.foregroundColor.rawValue: UIColor.white])
     cardNumberView.addAttributes([.foregroundColor : ColorConstants.yellow], range: NSRange(location: 0, length: 4))
   }
   
@@ -162,4 +162,9 @@ private struct LayoutConstants {
 private struct ColorConstants {
   static let yellow = UIColor(red: 255 / 255, green: 236 / 255, blue: 0 / 255, alpha: 1.0)
   static let gray = UIColor(red: 63 / 255, green: 63 / 255, blue: 63 / 255, alpha: 1.0)
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToNSAttributedStringKeyDictionary(_ input: [String: Any]) -> [NSAttributedString.Key: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }
